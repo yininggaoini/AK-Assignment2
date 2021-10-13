@@ -14,49 +14,84 @@ var oMontasTagen = document.getElementById("wochentag");
 oAktuleDatum.innerText = aktuelJahr + '-' + (aktuelMonat+1) + '-' + aktuelTag + ' ' +wochenTag[aktuelWochentag-1]; 
 
 
-    var firstDatum = new Date(kalenderJahr,aktuelMonat,1);
-    var firstTag =firstDatum.getDay();
-    document.write(firstTag);
-
-
-    
-   /* for(var i=0;i<yearDays[9];i++){
-        
-
-            var oTdDay = document.createElement("td");
-    
-            var oTxt = document.createTextNode(i+1);
-    
-            oTdDay.appendChild(oTxt);
-            oMontasTagen.appendChild(oTdDay);
-         
-        
-}*/
+var firstDatum = new Date(kalenderJahr,aktuelMonat,1);
+var firstTag =firstDatum.getDay();
+/*document.write(firstTag);*/
+  
 var daysNumber = 0;
 
-var oBreak = document.createTextNode("\r");
+var runCondition = 1;
 
+for(var row=0;row<5;row++){
+    var oTdDay = document.createElement("tr");
 
-
-
-    for(var row=0;row<5;row++){
-
-        var oTdDay = document.createElement("tr");
-        for(var cols=0;cols<7;cols++){
-            
+    if(firstTag==1){
+        
+        for(var cols=0;cols<7;cols++){      
             if(daysNumber<yearDays[9]){
 
-                var oGezi = document.createElement("td");
-                var oTxt = document.createTextNode(daysNumber+1);
-        
-                oGezi.appendChild(oTxt);
-                oTdDay.appendChild(oGezi);
-                oMontasTagen.appendChild(oTdDay);
-                daysNumber++;
-           
+            var oGezi = document.createElement("td");
+            var oTxt = document.createTextNode(daysNumber+1);
+    
+            oGezi.appendChild(oTxt);
+            oTdDay.appendChild(oGezi);
+            oMontasTagen.appendChild(oTdDay);
+            daysNumber++;
+            
             }
         }
-        
-       
     }
+        
+    else if(firstTag>1 && firstTag<7){
+        if(runCondition){
+
+            for(var emptyPlace=1;emptyPlace<firstTag;emptyPlace++){
+    
+                var oGezi = document.createElement("td");
+                var oEmpty = document.createTextNode("");
+    
+                oGezi.appendChild(oEmpty);                     
+                oTdDay.appendChild(oGezi);
+                oMontasTagen.appendChild(oTdDay);
+                
+            }
+            runCondition= 0;
+        }
+        if(row==0){
+            for(var cols=firstTag-1;cols<7;cols++){  
+                    
+                if(daysNumber<yearDays[9]){
+                      
+                    var oGezi = document.createElement("td");
+                    var oTxt = document.createTextNode(daysNumber+1);
+    
+                    oGezi.appendChild(oTxt);
+                    oTdDay.appendChild(oGezi);
+                    oMontasTagen.appendChild(oTdDay);
+                    daysNumber++;
+            
+                }
+            }
+
+        }else{
+
+            for(var cols=0;cols<7;cols++){  
+                    
+                if(daysNumber<yearDays[9]){
+                      
+                    var oGezi = document.createElement("td");
+                    var oTxt = document.createTextNode(daysNumber+1);
+    
+                    oGezi.appendChild(oTxt);
+                    oTdDay.appendChild(oGezi);
+                    oMontasTagen.appendChild(oTdDay);
+                    daysNumber++;
+            
+                }
+            }
+
+        }
+    }
+   
+}
 
