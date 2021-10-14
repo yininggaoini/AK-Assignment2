@@ -7,8 +7,7 @@ var aktuelWochentag = datum.getDay();
 var kalenderJahr = 2021;
 var oInputMonth = document.getElementById("monat-input");
 var oButton = document.getElementById("search-button");
-
-
+var oRefresh = document.getElementById("refresh-button");
 
 var normalYearDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 var leapYearDays = [31,29,31,30,31,30,31,31,30,31,30,31];
@@ -23,8 +22,6 @@ var printedDaysNumber = 0;
 var runCondition = 1;
 
 oButton.onclick = function(){
-    
-    
     var inputMonth = oInputMonth.value;
     inputMonth = parseInt(inputMonth);
     /*document.write(typeof(inputMonth));
@@ -32,17 +29,14 @@ oButton.onclick = function(){
     var firstDatumWeek = new Date(kalenderJahr,inputMonth-1,1);
     var firstDatumWochenTag =firstDatumWeek.getDay();
     /*document.write(firstTag);*/
-    if(firstDatumWochenTag==0) {
-            
-        firstDatumWochenTag=7;
-       
-    }
 
-    
+    if(firstDatumWochenTag==0) {  
+        firstDatumWochenTag=7;   
+    }
+     
     for(var row=0;row<6;row++){
-    
-        var oTdDay = document.createElement("tr");
         
+        var oTdDay = document.createElement("tr");     
         if(firstDatumWochenTag==1){      
             for(var cols=0;cols<7;cols++){      
                 if(printedDaysNumber<normalYearDays[inputMonth-1]){
@@ -57,10 +51,8 @@ oButton.onclick = function(){
             }
         }
             
-        else if(firstDatumWochenTag>1 && firstDatumWochenTag<=7){
-            
-            if(runCondition){
-                
+        else if(firstDatumWochenTag>1 && firstDatumWochenTag<=7){         
+            if(runCondition){   
                 for(var emptyPlace=1;emptyPlace<firstDatumWochenTag;emptyPlace++){
                     var oTData = document.createElement("td");
                     var oEmpty = document.createTextNode("");   
@@ -80,14 +72,13 @@ oButton.onclick = function(){
                 }
     
             }else{
-    
                 for(var cols=0;cols<7;cols++){                   
                     if(printedDaysNumber<normalYearDays[inputMonth-1]){                     
                         tagenDrucken(); 
                         printedDaysNumber++;        
                     }
                 }
-    
+                
             }
         }
     }
@@ -99,4 +90,10 @@ oButton.onclick = function(){
         oTdDay.appendChild(oTData);
         oMonatsTagen.appendChild(oTdDay);  
     }
+}
+
+
+/* Nachdem Button wiedermal geklickt wird, wird diese Seite aktualisiert geworden. */
+oRefresh.onclick = function(){
+    location.reload();
 }
