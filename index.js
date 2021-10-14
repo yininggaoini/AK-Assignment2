@@ -5,93 +5,98 @@ var aktuelTag = datum.getDate();
 var aktuelWochentag = datum.getDay();
 
 var kalenderJahr = 2021;
+var oInputMonth = document.getElementById("monat-input");
+var oButton = document.getElementById("search-button");
 
-var yearDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+
+var normalYearDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+var leapYearDays = [31,29,31,30,31,30,31,31,30,31,30,31];
 var wochenTag = ["Mon","Dien","Mitt","Donn","Frei","Sam","Sonn"];
+var monatsArr = ["Jän","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nom","Dez"];
 
 var oAktuleDatum = document.getElementById("actual-year-month");
-var oMontasTagen = document.getElementById("wochentag");
-oAktuleDatum.innerText = aktuelJahr + '-' + (aktuelMonat+1) + '-' + aktuelTag + ' ' +wochenTag[aktuelWochentag-1]; 
+var oMonatsTagen = document.getElementById("wochentag");
+oAktuleDatum.innerText = aktuelJahr + '-' + monatsArr[aktuelMonat] + '-' + aktuelTag + ' ' +wochenTag[aktuelWochentag-1]; 
 
-
-var firstDatum = new Date(kalenderJahr,aktuelMonat,1);
-var firstTag =firstDatum.getDay();
-/*document.write(firstTag);*/
-  
-var daysNumber = 0;
-
+var printedDaysNumber = 0;
 var runCondition = 1;
 
-for(var row=0;row<5;row++){
-    var oTdDay = document.createElement("tr");
-
-    if(firstTag==1){
-        
-        for(var cols=0;cols<7;cols++){      
-            if(daysNumber<yearDays[9]){
-
-            var oGezi = document.createElement("td");
-            var oTxt = document.createTextNode(daysNumber+1);
+oButton.onclick = function(){
     
-            oGezi.appendChild(oTxt);
-            oTdDay.appendChild(oGezi);
-            oMontasTagen.appendChild(oTdDay);
-            daysNumber++;
+    
+    var inputMonth = oInputMonth.value;
+    inputMonth = parseInt(inputMonth);
+    /*document.write(typeof(inputMonth));
+    document.write(inputMonth);*/
+    var firstDatumWeek = new Date(kalenderJahr,inputMonth-1,1);
+    var firstDatumWochenTag =firstDatumWeek.getDay();
+    /*document.write(firstTag);*/
+    if(firstDatumWochenTag==0) {
             
+        firstDatumWochenTag=7;
+       
+    }
+
+    
+    for(var row=0;row<6;row++){
+    
+        var oTdDay = document.createElement("tr");
+        
+        if(firstDatumWochenTag==1){      
+            for(var cols=0;cols<7;cols++){      
+                if(printedDaysNumber<normalYearDays[inputMonth-1]){
+                    var oTData = document.createElement("td");
+                    var oTDataTxt = document.createTextNode(printedDaysNumber+1);
+            
+                    oTData.appendChild(oTDataTxt);
+                    oTdDay.appendChild(oTData);
+                    oMonatsTagen.appendChild(oTdDay);
+                    printedDaysNumber++;          
+                }
             }
         }
-    }
-        
-    else if(firstTag>1 && firstTag<7){
-        if(runCondition){
-
-            for(var emptyPlace=1;emptyPlace<firstTag;emptyPlace++){
-    
-                var oGezi = document.createElement("td");
-                var oEmpty = document.createTextNode("");
-    
-                oGezi.appendChild(oEmpty);                     
-                oTdDay.appendChild(oGezi);
-                oMontasTagen.appendChild(oTdDay);
+            
+        else if(firstDatumWochenTag>1 && firstDatumWochenTag<=7){
+            
+            if(runCondition){
                 
-            }
-            runCondition= 0;
-        }
-        if(row==0){
-            for(var cols=firstTag-1;cols<7;cols++){  
-                    
-                if(daysNumber<yearDays[9]){
-                      
-                    var oGezi = document.createElement("td");
-                    var oTxt = document.createTextNode(daysNumber+1);
-    
-                    oGezi.appendChild(oTxt);
-                    oTdDay.appendChild(oGezi);
-                    oMontasTagen.appendChild(oTdDay);
-                    daysNumber++;
-            
+                for(var emptyPlace=1;emptyPlace<firstDatumWochenTag;emptyPlace++){
+                    var oTData = document.createElement("td");
+                    var oEmpty = document.createTextNode("");   
+                    oTData.appendChild(oEmpty);                     
+                    oTdDay.appendChild(oTData);
+                    oMonatsTagen.appendChild(oTdDay);            
                 }
+                runCondition= 0;
             }
-
-        }else{
-
-            for(var cols=0;cols<7;cols++){  
-                    
-                if(daysNumber<yearDays[9]){
-                      
-                    var oGezi = document.createElement("td");
-                    var oTxt = document.createTextNode(daysNumber+1);
     
-                    oGezi.appendChild(oTxt);
-                    oTdDay.appendChild(oGezi);
-                    oMontasTagen.appendChild(oTdDay);
-                    daysNumber++;
-            
+            if(row==0){
+                for(var cols=firstDatumWochenTag-1;cols<7;cols++){                
+                    if(printedDaysNumber<normalYearDays[inputMonth-1]){             
+                        tagenDrucken();  
+                        printedDaysNumber++;      
+                    }
                 }
+    
+            }else{
+    
+                for(var cols=0;cols<7;cols++){                   
+                    if(printedDaysNumber<normalYearDays[inputMonth-1]){                     
+                        tagenDrucken(); 
+                        printedDaysNumber++;        
+                    }
+                }
+    
             }
-
         }
     }
-   
+    
+    function tagenDrucken(){
+        var oTData = document.createElement("td");
+        var oTDataTxt = document.createTextNode(printedDaysNumber+1);
+        oTData.appendChild(oTDataTxt);
+        oTdDay.appendChild(oTData);
+        oMonatsTagen.appendChild(oTdDay);  
+    }
 }
-
