@@ -7,8 +7,9 @@ var aktuelWochentag = datum.getDay();
 if(aktuelWochentag==0){aktuelWochentag=7;}
 
 var oInputYear = document.getElementById("jahr-input");
-/*var oInputYear = 2021;*/
 var oInputMonth = document.getElementById("monat-input");
+var myregex = /^[0-9]*$/;  
+
 var oButton = document.getElementById("search-button");
 var oRefresh = document.getElementById("refresh-button");
 
@@ -27,11 +28,16 @@ var runCondition = 1;
 
 oButton.onclick = function(){
     var inputMonth = oInputMonth.value;
-    inputMonth = parseInt(inputMonth);
     /*document.write(typeof(inputMonth));
     document.write(inputMonth);*/
     var inputYear = oInputYear.value;
+
+    // Das Eingaben überprüfen, nur Nummer erlaubt.
+    if(myregex.test(oInputYear.value)==false||myregex.test(oInputMonth.value)==false)
+        alert("Bitte bei Jahr und Monat nur Nummer tippen");
+
     inputYear = parseInt(inputYear);
+    inputMonth = parseInt(inputMonth);
     
     /*leapYearDetermine anrufen, um zu prüfen, das Jahr leap oder normales Jahr ist. */
     leapYearDetermine(inputYear);
