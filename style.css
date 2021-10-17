@@ -13,6 +13,9 @@
     margin: auto;
     font-family: monospace;
     font-size: x-large;
+
+    width: 100%;
+    table-layout: fixed;
 }
 
 form{
@@ -36,7 +39,4 @@ strong{
     background-image: linear-gradient(to right, #AFEEEE, #FFEBCD);
     border-spacing: 15px;
     border-radius: 15px;
-
-    width: 100%;
-    table-layout: fixed;
 }
