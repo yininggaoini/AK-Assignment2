@@ -1,0 +1,39 @@
+.inputText{
+    width: 75px;
+}
+
+.button-style{
+    width: 75px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.whole-css{
+    text-align: center;
+    margin: auto;
+    font-family: monospace;
+    font-size: x-large;
+}
+
+form{
+    background-image: linear-gradient(to right,#E1EEEE,#AFEEEE);
+    padding: 20px 40px 20px 40px;
+}
+
+strong{
+    color: #4682B4;   
+}
+
+#actual-date-list{
+    margin: 10px;
+}
+
+#wochentag-div{
+    margin: 0px 20px 10px 20px;
+}
+
+#wochentag{
+    background-image: linear-gradient(to right, #AFEEEE, #FFEBCD);
+    border-spacing: 15px;
+    border-radius: 15px;
+}

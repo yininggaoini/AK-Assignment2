@@ -13,37 +13,55 @@
     
 </head>
 <body>
+    <div id="wholeCalender" class="whole-css">
 
-    <!-- Jahr-Monat search Feld -->
-    <div id="search-feld">
-        <form name="search-feld-form">
-            Jahr: <input type="text" id="jahr-input" placeholder="Number of Year" maxlength="4"  />
-            Monat: <input type="text" id="monat-input" placeholder="1 - 12" maxlength="2"  required/>
-            <input type="button" id="search-button" value="search">
-            <input type="button" id="refresh-button" value="refresh">
-        </form>
-    </div>
-
-    <div id="Calender">     
-        <!--Es zeigt aktuelle Monats und das gewünschte Monat auswählen.-->
-        <div id="actual-date-list">
-            <button id="prev">&lt;</button>          
-            <strong id="actual-year-month"></strong>
-            <button id="next">&gt;</button>
+        <!-- Jahr-Monat search Feld -->
+        <div id="search-feld">
+            <form name="search-feld-form">
+                Jahr: <input class="button-style" type="text" class="inputText" id="jahr-input" placeholder="Year's Num" maxlength="4"  />
+                Monat: <input class="button-style" type="text" class="inputText" id="monat-input" placeholder="1 - 12" maxlength="2"  required/>
+                <input class="button-style" type="button" id="search-button" value="search">
+                <input class="button-style" type="button" id="refresh-button" value="refresh">
+            </form>
         </div>
-
-        <div id="wochentag-div">         
-            <table id="wochentag">               
-                <tr>
-                    <th>Mon</th>
-                    <th>Dien</th>
-                    <th>Mitt</th>
-                    <th>Donn</th>
-                    <th>Frei</th>
-                    <th>Sam</th>
-                    <th>Sonn</th>
-                </tr>            
-            </table>
+    
+        <div id="Calender">     
+            <!--Es zeigt aktuelle Monats und das gewünschte Monat auswählen.-->
+            <div id="actual-date-list">                
+                <strong id="actual-year-month"></strong>
+            </div>
+    
+            <!--
+                <select>
+                    <option value="1">Jän</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mär</option>
+                    <option value="4">Apr</option>
+                    <option value="5">Mai</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Okt</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dez</option>
+                </select>
+                -->
+    
+            <div id="wochentag-div">         
+                <table id="wochentag" class="whole-css">               
+                    <tr>
+                        <th>Mon</th>
+                        <th>Dien</th>
+                        <th>Mitt</th>
+                        <th>Donn</th>
+                        <th>Frei</th>
+                        <th>Sam</th>
+                        <th>Sonn</th>
+                    </tr>            
+                </table>
+            </div>
+    
         </div>
 
     </div>
