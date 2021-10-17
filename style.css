@@ -36,4 +36,7 @@ strong{
     background-image: linear-gradient(to right, #AFEEEE, #FFEBCD);
     border-spacing: 15px;
     border-radius: 15px;
+
+    width: 100%;
+    table-layout: fixed;
 }
