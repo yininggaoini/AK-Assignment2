@@ -40,3 +40,9 @@ strong{
     border-spacing: 15px;
     border-radius: 15px;
 }
+
+p{
+    color: #DB7093;
+    font-size: large;
+    font-family: monospace;
+}

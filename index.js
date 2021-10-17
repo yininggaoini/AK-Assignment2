@@ -34,7 +34,7 @@ oButton.onclick = function(){
 
     // Das Eingaben überprüfen, nur Nummer erlaubt.
     if(myregex.test(oInputYear.value)==false||myregex.test(oInputMonth.value)==false)
-        alert("Bitte bei Jahr und Monat nur Nummer tippen");
+    alert("Bitte bei Jahr und Monat nur Nummer tippen");
 
     inputYear = parseInt(inputYear);
     inputMonth = parseInt(inputMonth);
@@ -64,7 +64,7 @@ oButton.onclick = function(){
                 }
             }
         }
-            
+        
         else if(firstDatumWochenTag>1 && firstDatumWochenTag<=7){  
             // Leere Plätze vom Anfang des Kalenders drucken.       
             if(runCondition){   
@@ -77,7 +77,7 @@ oButton.onclick = function(){
                 }
                 runCondition= 0;
             }
-    
+            
             // Die restliche Plätze von 1. Zeile drucken.
             if(row==0){
                 for(var cols=firstDatumWochenTag-1;cols<7;cols++){                
@@ -108,10 +108,10 @@ oButton.onclick = function(){
         oTdDay.appendChild(oTData);
         oMonatsTagen.appendChild(oTdDay);  
     }
-
+    
     // Das eingegebene Jahr wird überprüft, ob es leap-year ist,oder nicht.
    function leapYearDetermine(inputYears){
-        if((inputYears%100!==0 && inputYears%4==0)||(inputYears%100==0 && inputYears%400==0)){
+       if((inputYears%100!==0 && inputYears%4==0)||(inputYears%100==0 && inputYears%400==0)){
             yearDays = leapYearDays;
             /*document.write("This is a leap year");*/
         }else{
@@ -120,7 +120,6 @@ oButton.onclick = function(){
         }
     }
 }
-
 
 /* Nachdem Button wiedermal geklickt wird, wird diese Seite aktualisiert geworden. */
 oRefresh.onclick = function(){
