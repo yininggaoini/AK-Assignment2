@@ -1,30 +1,36 @@
-var datum = new Date();
-var aktuelJahr = datum.getFullYear();
-var aktuelMonat = datum.getMonth();
-var aktuelTag = datum.getDate();
+const datum = new Date();
+const aktuelJahr = datum.getFullYear();
+const aktuelMonat = datum.getMonth();
+const aktuelTag = datum.getDate();
 var aktuelWochentag = datum.getDay();
 
 if(aktuelWochentag==0){aktuelWochentag=7;}
 
-var oInputYear = document.getElementById("jahr-input");
-var oInputMonth = document.getElementById("monat-input");
-var myregex = /^[0-9]*$/;  
+const oInputYear = document.getElementById("jahr-input");
+const oInputMonth = document.getElementById("monat-input");
+const myregex = /^[0-9]*$/;  
 
-var oButton = document.getElementById("search-button");
-var oRefresh = document.getElementById("refresh-button");
+const oButton = document.getElementById("search-button");
+const oRefresh = document.getElementById("refresh-button");
 
 var yearDays = "";
-var normalYearDays = [31,28,31,30,31,30,31,31,30,31,30,31];
-var leapYearDays = [31,29,31,30,31,30,31,31,30,31,30,31];
-var wochenTag = ["Mon","Dien","Mitt","Donn","Frei","Sam","Sonn"];
-var monatsArr = ["Jän","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nom","Dez"];
+const normalYearDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+const leapYearDays = [31,29,31,30,31,30,31,31,30,31,30,31];
+const wochenTag = ["Mon","Dien","Mitt","Donn","Frei","Sam","Sonn"];
+const monatsArr = ["Jän","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nom","Dez"];
 
-var oAktuleDatum = document.getElementById("actual-year-month");
-var oMonatsTagen = document.getElementById("wochentag");
+const oAktuleDatum = document.getElementById("actual-year-month");
+const oMonatsTagen = document.getElementById("wochentag");
 oAktuleDatum.innerText = 'Heute :'+ aktuelJahr + '-' + monatsArr[aktuelMonat] + '-' + aktuelTag + ' ' +wochenTag[aktuelWochentag-1]; 
 
 var printedDaysNumber = 0;
 var runCondition = 1;
+
+var oTdDay;
+var oTData;
+var oEmpty;
+var oTData;
+var oTDataTxt;
 
 oButton.onclick = function(){
     var inputMonth = oInputMonth.value;
@@ -54,10 +60,10 @@ oButton.onclick = function(){
      
     for(var row=0;row<6;row++){
         
-        var oTdDay = document.createElement("tr");     
+        oTdDay = document.createElement("tr");     
         // Der Fall, dass es keine freie Plätze vom Anfang hat.
         if(firstDatumWochenTag==1){      
-            for(var cols=0;cols<7;cols++){      
+            for(let cols=0;cols<7;cols++){      
                 if(printedDaysNumber<yearDays[inputMonth-1]){
                     tagenDrucken();
                     printedDaysNumber++;          
@@ -68,19 +74,13 @@ oButton.onclick = function(){
         else if(firstDatumWochenTag>1 && firstDatumWochenTag<=7){  
             // Leere Plätze vom Anfang des Kalenders drucken.       
             if(runCondition){   
-                for(var emptyPlace=1;emptyPlace<firstDatumWochenTag;emptyPlace++){
-                    var oTData = document.createElement("td");
-                    var oEmpty = document.createTextNode("");   
-                    oTData.appendChild(oEmpty);                     
-                    oTdDay.appendChild(oTData);
-                    oMonatsTagen.appendChild(oTdDay);            
-                }
+                blankSpaceDruck(firstDatumWochenTag);
                 runCondition= 0;
             }
             
             // Die restliche Plätze von 1. Zeile drucken.
             if(row==0){
-                for(var cols=firstDatumWochenTag-1;cols<7;cols++){                
+                for(let cols=firstDatumWochenTag-1;cols<7;cols++){                
                     if(printedDaysNumber<yearDays[inputMonth-1]){             
                         tagenDrucken();  
                         printedDaysNumber++;      
@@ -89,7 +89,7 @@ oButton.onclick = function(){
     
             }else{
                 // restliche Zeile drucken.
-                for(var cols=0;cols<7;cols++){                   
+                for(let cols=0;cols<7;cols++){                   
                     if(printedDaysNumber<yearDays[inputMonth-1]){                     
                         tagenDrucken(); 
                         printedDaysNumber++;        
@@ -102,8 +102,8 @@ oButton.onclick = function(){
     
     // Die Tagen drucken.
     function tagenDrucken(){
-        var oTData = document.createElement("td");
-        var oTDataTxt = document.createTextNode(printedDaysNumber+1);
+        oTData = document.createElement("td");
+        oTDataTxt = document.createTextNode(printedDaysNumber+1);
         oTData.appendChild(oTDataTxt);
         oTdDay.appendChild(oTData);
         oMonatsTagen.appendChild(oTdDay);  
@@ -117,6 +117,16 @@ oButton.onclick = function(){
         }else{
             yearDays = normalYearDays;
             /*document.write("This is a normal year");*/
+        }
+    }
+
+    function blankSpaceDruck(firstDatumWochenTag){
+        for(let emptyPlace=1;emptyPlace<firstDatumWochenTag;emptyPlace++){
+            oTData = document.createElement("td");
+            oEmpty = document.createTextNode("");   
+            oTData.appendChild(oEmpty);                     
+            oTdDay.appendChild(oTData);
+            oMonatsTagen.appendChild(oTdDay);            
         }
     }
 }
